@@ -1,10 +1,9 @@
 var express = require('express');
 var router = express.Router();
-var url = require('url');
 var navbarjson = require('../config/navbar.json');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res) {
     res.render(
         'index',
         {
@@ -15,7 +14,7 @@ router.get('/', function(req, res, next) {
 });
 
 /* GET about page. */
-router.get('/about', function(req, res, next) {
+router.get('/about', function(req, res) {
     res.render(
         'about',
         {
@@ -26,7 +25,7 @@ router.get('/about', function(req, res, next) {
 });
 
 /* GET reports page. */
-router.get('/reports', function(req, res, next) {
+router.get('/reports', function(req, res) {
     res.render(
         'reports',
         {

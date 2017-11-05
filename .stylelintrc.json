@@ -1,7 +1,7 @@
 {
     "rules": {
         "indentation": [
-            4,
+            2,
             {
                 "except": ["value"]
             }
@@ -14,7 +14,7 @@
         "block-no-empty": true,
         "color-no-invalid-hex": true,
         "comment-no-empty": true,
-        "declaration-block-no-duplicate-properties": [ 
+        "declaration-block-no-duplicate-properties": [
             true,
             {
                 "ignore": ["consecutive-duplicates-with-different-values"]
@@ -61,7 +61,7 @@
         "block-opening-brace-space-after": "always-single-line",
         "block-opening-brace-space-before": "always",
         "color-hex-case": "lower",
-        "color-hex-length": "short",
+        "color-hex-length": "long",
         "comment-empty-line-before": [
             "always",
             {
@@ -129,13 +129,7 @@
         "number-leading-zero": "always",
         "number-no-trailing-zeros": true,
         "property-case": "lower",
-        "rule-empty-line-before": [
-            "always-multi-line",
-            {
-                "except": ["first-nested"],
-                "ignore": ["after-comment"]
-            }
-        ],
+        
         "selector-attribute-brackets-space-inside": "never",
         "selector-attribute-operator-space-after": "never",
         "selector-attribute-operator-space-before": "never",
