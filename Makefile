@@ -121,9 +121,15 @@ check: check-tools-js #check-tools-bash check-tools-php
 
 
 
+# # target: test               - Run all tests.
+# .PHONY: test
+# test: htmlhint stylelint jscs eslint jsunittest #csslint
+# 	@$(call HELPTEXT,$@)
+# 	[ ! -f composer.json ] || composer validate
+
 # target: test               - Run all tests.
 .PHONY: test
-test: htmlhint stylelint jscs eslint jsunittest #csslint
+test: htmlhint stylelint jscs eslint #csslint
 	@$(call HELPTEXT,$@)
 	[ ! -f composer.json ] || composer validate
 
@@ -131,7 +137,7 @@ test: htmlhint stylelint jscs eslint jsunittest #csslint
 
 # target: doc                - Generate documentation.
 .PHONY: doc
-doc: 
+doc:
 	@$(call HELPTEXT,$@)
 
 
@@ -279,7 +285,7 @@ ifneq ($(wildcard .nycrc),)
 	$(NYC) $(MOCHA) --reporter dot 'test/**/*.js'
 else
 	$(MOCHA) --reporter dot 'test/**/*.js'
-endif 
+endif
 
 
 
