@@ -2,7 +2,6 @@
     "rules": {
         "indentation": [
             2,
-            4,
             {
                 "except": ["value"]
             }
