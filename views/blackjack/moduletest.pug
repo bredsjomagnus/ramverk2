@@ -1,0 +1,8 @@
+extend ../layout.pug
+
+block main
+    .container
+        .page
+            include:markdown-it ../../content/moduletest.md
+            p thisurl #{thisurl}
+            p route #{navlist[3].route}

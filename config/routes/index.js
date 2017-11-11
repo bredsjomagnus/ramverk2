@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var navbarjson = require('../config/navbar.json');
+var navbarjson = require('../navbar.json');
 
 /* GET home page. */
 router.get('/', function(req, res) {

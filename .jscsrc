@@ -8,6 +8,12 @@
 	"requireLineFeedAtFileEnd": true,
 	"disallowTrailingWhitespace": true,
 
+	"excludeFiles": [
+	    "public/**",
+	    "node_modules/**",
+		"coverage/**"
+	],
+
 	"requireSemicolons": true,
 
 	"requireCamelCaseOrUpperCaseIdentifiers": {

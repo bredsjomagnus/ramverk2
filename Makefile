@@ -129,7 +129,7 @@ check: check-tools-js #check-tools-bash check-tools-php
 
 # target: test               - Run all tests.
 .PHONY: test
-test: htmlhint stylelint jscs eslint #csslint
+test: htmlhint jscs eslint #csslint stylelint
 	@$(call HELPTEXT,$@)
 	[ ! -f composer.json ] || composer validate
 
@@ -225,7 +225,7 @@ check-tools-js:
 .PHONY: htmlhint
 htmlhint:
 	@$(call HELPTEXT,$@)
-	[ ! -f .htmlhintrc ] || $(HTMLHINT) --ignore build/**,node_modules/** | grep -v "Config loaded:"
+	[ ! -f .htmlhintrc ] || $(HTMLHINT) --ignore build/**,node_modules/**,coverage/** | grep -v "Config loaded:"
 
 
 
@@ -282,9 +282,11 @@ eslint-fix:
 jsunittest:
 	@$(call HELPTEXT,$@)
 ifneq ($(wildcard .nycrc),)
-	$(NYC) $(MOCHA) --reporter dot 'test/**/*.js'
+	# $(NYC) $(MOCHA) --reporter dot 'test/**/*.js'
+	$(NYC) $(MOCHA) --reporter=html --reporter=text mocha test/**/*.js
 else
-	$(MOCHA) --reporter dot 'test/**/*.js'
+	# $(MOCHA) --reporter dot 'test/**/*.js'
+	$(NYC) $(MOCHA) --reporter=html --reporter=text mocha test/**/*.js
 endif
 
 

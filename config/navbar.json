@@ -10,5 +10,9 @@
     {
         "route": "/reports",
         "text": "Rapporter"
+    },
+    {
+        "route": "/blackjack",
+        "text": "Modueltest"
     }
 ]
