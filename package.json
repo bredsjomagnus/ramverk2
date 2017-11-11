@@ -27,16 +27,17 @@
     "codecov": "^3.0.0",
     "coveralls": "^3.0.0",
     "csslint": "^1.0.5",
-    "eslint": "^4.10.0",
+    "eslint": "^4.11.0",
     "eslint-plugin-react": "^7.4.0",
     "html-minifier": "^3.5.6",
     "htmlhint": "^0.9.13",
     "js-yaml": "^3.10.0",
     "jscs": "^3.0.7",
     "jsonlint": "^1.6.2",
+    "lesshint": "^4.4.0",
     "mocha": "^4.0.1",
     "nyc": "^11.3.0",
     "stylelint": "^8.2.0",
-    "uglify-js": "^3.1.7"
+    "uglify-js": "^3.1.8"
   }
 }

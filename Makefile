@@ -57,6 +57,7 @@ CSSLINT   := $(NODEMODBIN)/csslint
 STYLELINT := $(NODEMODBIN)/stylelint
 JSCS      := $(NODEMODBIN)/jscs
 ESLINT    := $(NODEMODBIN)/eslint
+LESSHINT  := $(NODEMODBIN)/lesshint
 JSONLINT  := $(NODEMODBIN)/jsonlint
 JSYAML    := $(NODEMODBIN)/js-yaml
 HTMLMINI  := $(NODEMODBIN)/html-minifier
@@ -129,7 +130,7 @@ check: check-tools-js #check-tools-bash check-tools-php
 
 # target: test               - Run all tests.
 .PHONY: test
-test: htmlhint jscs eslint #csslint stylelint
+test: htmlhint jscs eslint lesshint #csslint stylelint
 	@$(call HELPTEXT,$@)
 	[ ! -f composer.json ] || composer validate
 
@@ -186,7 +187,7 @@ tag-prepare:
 .PHONY: setup-tools-js
 setup-tools-js:
 	@$(call HELPTEXT,$@)
-	npm install --save-dev htmlhint csslint stylelint jscs eslint eslint-plugin-react jsonlint js-yaml html-minifier clean-css-cli uglify-js mocha nyc coveralls codecov
+	npm install --save-dev htmlhint csslint stylelint jscs eslint eslint-plugin-react jsonlint js-yaml html-minifier clean-css-cli uglify-js mocha nyc coveralls codecov lesshint
 
 
 
@@ -206,6 +207,7 @@ check-tools-js:
 	@$(call CHECK_VERSION, npm)
 	@$(call CHECK_VERSION, $(HTMLHINT))
 	@$(call CHECK_VERSION, $(CSSLINT))
+	@$(call CHECK_VERSION, $(LESSHINT))
 	@$(call CHECK_VERSION, $(STYLELINT))
 	@$(call CHECK_VERSION, $(JSCS))
 	@$(call CHECK_VERSION, $(ESLINT))
@@ -234,6 +236,12 @@ htmlhint:
 csslint:
 	@$(call HELPTEXT,$@)
 	[ ! -f .csslintrc ] || $(CSSLINT) .
+
+# target: lesshint           - Less linter.
+.PHONY: lesshint
+lesshint:
+	@$(call HELPTEXT,$@)
+	[ ! -f .lesshintrc ] || $(LESSHINT) public/stylesheets/modules/
 
 
 
