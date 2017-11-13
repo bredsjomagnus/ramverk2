@@ -31,7 +31,7 @@ router.get('/reports', function(req, res) {
         {
             title: 'RAPPORTER | maaa16',
             navlist: navbarjson,
-            thisurl: req.url
+            thisurl: req.url,
         });
 });
 

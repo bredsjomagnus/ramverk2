@@ -1,0 +1,28 @@
+extend ../layout.pug
+
+block main
+    .container
+        .page
+            h1 GETPOST
+            p Request method: #{method}
+            .row
+                .col-md-6
+                    h3 GET
+                    p Sent GET: #{postedget}
+
+                    <form method='GET' action='#'>
+                        div.form-group
+                            <label for='one'>Skicka med GET</label>
+                            <input class='form-control' type='text' name='oneget' placeholder='placeholder...'/>
+                        <input class='btn btn-primary' type='submit' name='submitgetbtn' value='GET' />
+                    </form>
+                .col-md-6
+                    h3 POST
+                    p Sent POST: #{postedpost}
+
+                    <form method='POST' action='#'>
+                        div.form-group
+                            <label for='one'>Skicka med POST</label>
+                            <input class='form-control' type='text' name='onepost' placeholder='placeholder...'/>
+                        <input class='btn btn-primary' type='submit' name='submitpostbtn' value='POST' />
+                    </form>

@@ -1,0 +1,16 @@
+extend ../layout.pug
+
+block main
+    .container
+        .page
+            p.text-muted.small Här är sandlåda för att lära sig Node JS, Express, Pug mm.
+            p.text-muted.small Parametern -> thisurl = #{thisurl}
+            p.text-muted.small Parametern -> route = #{navlist[3].route}
+
+            h2 SANDLÅDA
+            p Leklänkar:
+            ul
+                li
+                    a(href='/playground/test/testpage') testpage <br>
+                li
+                    a(href='/playground/posttest') GetPosttest

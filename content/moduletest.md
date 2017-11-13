@@ -1,7 +1,5 @@
-MODULTEST
-============
+Här är sandlåda för att lära sig Node JS, Express, Pug mm.
 
-Här är sandlådan för min framtida modul. Vet ännu inte vad det skall bli men någon form av spel lutar det mot i dagsläget.
-
-### SANDLÅDA
-Testlänk -> [testpage](/blackjack/test/testpage)
+## SANDLÅDA
+- [testpage](/blackjack/test/testpage)
+- [GetPosttest](/blackjack/posttest)

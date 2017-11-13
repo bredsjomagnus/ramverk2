@@ -12,7 +12,11 @@
         "text": "Rapporter"
     },
     {
+        "route": "/playground",
+        "text": "Sandlåda"
+    },
+    {
         "route": "/blackjack",
-        "text": "Modueltest"
+        "text": "Modul"
     }
 ]
