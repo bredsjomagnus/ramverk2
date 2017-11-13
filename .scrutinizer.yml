@@ -1,10 +1,10 @@
 checks:
     javascript: true
 
-filter:
-    excluded_paths:
-        - node_modules/*
-        - coverage/*
+# filter:
+#     excluded_paths:
+#         - node_modules/*
+#         - coverage/*
 
     tests:
         before:
