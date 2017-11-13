@@ -13,8 +13,8 @@ services:
         volumes:
             - .:/var/www/html
     node6115:
-        image: node:6.11.5
+        image: myapp-6.11.5
         ports:
-            - "8061:80"
+            - "8006:80"
         volumes:
             - .:/var/www/html

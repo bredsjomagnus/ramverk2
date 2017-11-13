@@ -5,3 +5,10 @@ filter:
     excluded_paths:
         - node_modules/*
         - coverage/*
+
+        tests:
+            override:
+                -
+                    # command: 'istanbul cover --report clover test.js'
+                    # command: 'make test'
+                    # command: 'npm run test-scrutinizer'
