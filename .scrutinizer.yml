@@ -8,9 +8,7 @@ filter:
 
         tests:
             before:
-                -
-                    command: make install
+                - make install
 
             override:
-                -
-                    command: make test
+                -  make test
