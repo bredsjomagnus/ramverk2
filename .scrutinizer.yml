@@ -6,8 +6,11 @@ filter:
         - node_modules/*
         - coverage/*
 
-        tests:
-            override:
-                - command: 'make test'
-                    # command: 'istanbul cover --report clover test.js'
-                    # command: 'npm run test-scrutinizer'
+    tests:
+        before:
+            -
+                command: make install
+
+        override:
+            -
+                command: make test
