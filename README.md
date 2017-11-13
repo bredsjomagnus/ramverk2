@@ -8,4 +8,11 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/bredsjomagnus/ramverk2/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/bredsjomagnus/ramverk2/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/bredsjomagnus/ramverk2/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/bredsjomagnus/ramverk2/?branch=master)
 
-# ramverk2
+# Ramverk2
+För utbildning, PA1442 H17 Lp2 Webbaserade ramverk 2 (distans) BTH.
+
+Ett demo för repot finns [här](http://82.102.5.98:1337/).
+
+#### Kursmoment i repot så här långt
+  - v1.\*.* - Express/pug
+  - v2.\*.* - Docker
