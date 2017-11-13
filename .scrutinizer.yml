@@ -10,5 +10,5 @@ filter:
             override:
                 -
                     # command: 'istanbul cover --report clover test.js'
-                    # command: 'make test'
+                    command: 'make test'
                     # command: 'npm run test-scrutinizer'
