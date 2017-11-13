@@ -6,10 +6,9 @@ filter:
         - node_modules/*
         - coverage/*
 
-    build:
-        tests:
-            before:
-                - make install
+    tests:
+        before:
+            - make install
 
-            override:
-                - make test
+        override:
+            - make test
