@@ -16,7 +16,7 @@
         "text": "Sandlåda"
     },
     {
-        "route": "/blackjack",
-        "text": "Modul"
+        "route": "/memory",
+        "text": "Memory"
     }
 ]

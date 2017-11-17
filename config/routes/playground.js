@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var playgroundController = require('../../src/Playground/playgroundController');
 
-/* GET blackjack index page. */
+/* GET playground index page. */
 router.get('/', playgroundController.indexPage);
 
 router.get('/test/:testparameter', playgroundController.testPage);
