@@ -16,6 +16,14 @@
 
 [![codecov](https://codecov.io/gh/bredsjomagnus/ramverk2/branch/master/graph/badge.svg)](https://codecov.io/gh/bredsjomagnus/ramverk2)
 
+*Codeclimate*
+
+[![Maintainability](https://api.codeclimate.com/v1/badges/a0743fcaaf6e31f8e958/maintainability)](https://codeclimate.com/github/bredsjomagnus/ramverk2/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/a0743fcaaf6e31f8e958/test_coverage)](https://codeclimate.com/github/bredsjomagnus/ramverk2/test_coverage)
+
+*Codeacy*
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/59e45be9ec944a0b8b08992f61086b85)](https://www.codacy.com/app/bredsjomagnus/ramverk2?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=bredsjomagnus/ramverk2&amp;utm_campaign=Badge_Grade)
+
 # Ramverk2
 För utbildning, PA1442 H17 Lp2 Webbaserade ramverk 2 (distans) BTH.
 
