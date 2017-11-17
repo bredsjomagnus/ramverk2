@@ -1,20 +1,55 @@
 version: "3"
 services:
-    node900:
-        image: node:9.0.0
-        ports:
-            - "8090:80"
+    node_latest:
+        build:
+            context: .
+            dockerfile: docker/Dockerfile-node-latest
         volumes:
-            - ./:/var/www/html/
-    node890:
-        image: node:8.9.0
+            - ./:/app/
         ports:
-            - "8089:80"
+            - "3000:3000"
+
+    node_7:
+        build:
+            context: .
+            dockerfile: docker/Dockerfile-node-7
         volumes:
-            - .:/var/www/html
-    node6115:
-        image: myapp-6.11.5
+            - ./:/app/
         ports:
-            - "8006:80"
+            - "3000:3000"
+
+    node_6:
+        build:
+            context: .
+            dockerfile: docker/Dockerfile-node-6
         volumes:
-            - .:/var/www/html
+            - ./:/app/
+        ports:
+            - "3000:3000"
+
+    node_alpine:
+        build:
+            context: .
+            dockerfile: docker/Dockerfile-node-alpine
+        volumes:
+            - ./:/app/
+        ports:
+            - "3000:3000"
+
+    node_7_alpine:
+        build:
+            context: .
+            dockerfile: docker/Dockerfile-node-7-alpine
+        volumes:
+            - ./:/app/
+        ports:
+            - "3000:3000"
+
+    node_6_alpine:
+        build:
+            context: .
+            dockerfile: docker/Dockerfile-node-6-alpine
+        volumes:
+            - ./:/app/
+        ports:
+            - "3000:3000"
