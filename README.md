@@ -22,6 +22,7 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/a0743fcaaf6e31f8e958/test_coverage)](https://codeclimate.com/github/bredsjomagnus/ramverk2/test_coverage)
 
 *Codeacy*
+
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/59e45be9ec944a0b8b08992f61086b85)](https://www.codacy.com/app/bredsjomagnus/ramverk2?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=bredsjomagnus/ramverk2&amp;utm_campaign=Badge_Grade)
 
 # Ramverk2
