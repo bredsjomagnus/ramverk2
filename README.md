@@ -8,6 +8,14 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/bredsjomagnus/ramverk2/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/bredsjomagnus/ramverk2/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/bredsjomagnus/ramverk2/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/bredsjomagnus/ramverk2/?branch=master)
 
+*Coveralls*
+
+[![Coverage Status](https://coveralls.io/repos/github/bredsjomagnus/ramverk2/badge.svg?branch=master)](https://coveralls.io/github/bredsjomagnus/ramverk2?branch=master)
+
+*Codecov*
+
+[![codecov](https://codecov.io/gh/bredsjomagnus/ramverk2/branch/master/graph/badge.svg)](https://codecov.io/gh/bredsjomagnus/ramverk2)
+
 # Ramverk2
 För utbildning, PA1442 H17 Lp2 Webbaserade ramverk 2 (distans) BTH.
 
