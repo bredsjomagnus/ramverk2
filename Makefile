@@ -134,6 +134,23 @@ test: htmlhint jscs eslint lesshint jsunittest #csslint stylelint
 	@$(call HELPTEXT,$@)
 	[ ! -f composer.json ] || composer validate
 
+# target: test1               - Run test against node_6_alpine.
+.PHONY: test1
+test1: node6alpinetest
+	@$(call HELPTEXT,$@)
+	[ ! -f composer.json ] || composer validate
+
+# target: test2               - Run test against node_7_alpine.
+.PHONY: test2
+test2: node7alpinetest
+	@$(call HELPTEXT,$@)
+	[ ! -f composer.json ] || composer validate
+
+# target: test3               - Run test against node latest.
+.PHONY: test3
+test2: nodelatest
+	@$(call HELPTEXT,$@)
+	[ ! -f composer.json ] || composer validate
 
 
 # target: doc                - Generate documentation.
@@ -298,6 +315,24 @@ else
 	# $(NYC) $(MOCHA) --reporter=html --reporter=text mocha test/**/*.js
 	$(NYC) --reporter=html --reporter=text $(MOCHA) test/**/*.js
 endif
+
+# target: node6alpinetest         - Docker node_6_alpine test
+.PHONY: node6alpinetest
+node6alpinetest:
+	@$(call HELPTEXT,$@)
+	docker-compose run node_6_alpine npm test
+
+# target: node7alpinetest         - Docker node_7_alpine test
+.PHONY: node7alpinetest
+node7alpinetest:
+	@$(call HELPTEXT,$@)
+	docker-compose run node_7_alpine npm test
+
+# target: nodelatest         - Docker node_latest test
+.PHONY: nodelatest
+nodelatest:
+	@$(call HELPTEXT,$@)
+	docker-compose run node_latest npm test
 
 
 
