@@ -12,4 +12,8 @@ build:
             - make install
 
         override:
-            - make test
+            -
+                command: 'npm run test-scrutinizer'
+                coverage:
+                    file: 'coverage/clover.xml'
+                    format: 'clover'
