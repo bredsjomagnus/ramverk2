@@ -41,3 +41,38 @@ Både och. Jag har haft stora problem på Windows och Cygwin. Det finns tydligen
 
 #### Skapade du din egen image, berätta om den?
 Jag gjorde ett försök som jag däremot inte är helt säker på om det är hundra procent rätt. Jag kan skapa en image från min 'Dockerfile' via `docker build` och sen använder imagen i docker-compose och starta upp allt med `docker-compose up -d`. Därmed antar jag att syntaxen stämmer och jag ser även via `docker container ls` att den kontainer som innehåller min egenskapade image är igång. Men det är i det sista steget jag går bet. Jag kan inte få fram appen i webbläsaren efter uppstart, vilken port jag än testar mot. Vet inte vad som är fel, om det är en enkel liten miss eller, ett större, mer grundläggande fel. Men tänkte att min 'Dockerfile' och 'docker-compose.yml' får ligga kvar som de ser ut i nuläget. Hoppas och tror detta skall klarna lite längre fram.
+
+---
+
+### KMOM03
+
+#### Berätta vilka tekniker/verktyg du valde för enhetstester och kodtäckning och varför?
+Då jag inte känner mig allt för säker när det kommer till enhetstestning ville jag inte sväva ut allt för mycket, utan lät mig guidas av artikelns teknikval. Det blev således Mocha och Istanbul för testning och kodtäckning.
+
+Tror detta var ett bra val för min del, då jag kunde sätta igång med själva testerna relativt snart och få lite mer träning på den biten.
+
+#### Berätta om din CI-kedja och reflektera över de valen du gjorde?
+För byggen används Travis och Scrutinizer. Via Travis fås även kodkvalitét och kodtäckning från Code Climate och Codeacy. Kodtäckning fås även via Scrutinizer och Codecov.
+
+Jag tycker mycket om Scrutnizier som ju har lite av allt i ett paket. Men det var kul att testa lite nytt också och jag gillade Coveralls sida och Codecovs sätt att visa kodtäckningen över tid. Det verkar finnas hur många sådan här tjänster som helst att koppla upp sig mot. Sen kan README blir nästa allt för belamrad av badges, så man måste sätta en gräns någonstans.
+
+En sak som stör mig är att jag inte fick Code Climates 'Test Coverage' att fungera. Varken för redovisningsrepot eller apprepot. Försökte hitta vad som saknades på deras hemsida och hörde mig för i Gitterchatten. Men utan lycka. Kanske att det klarnar lite längre fram, men tog bort den badgen från apprepot så länge.
+
+#### Reflektera över hur det gick att integrera enhetstesterna i olika Docker-kontainerns och om du ser någon nytta med detta.
+Det gick väldigt smidigt, tack vare övningsartikeln och exempelkoden i exempelmappen. Men som vanligt fungerar det inte på Cygwin utan jag kör allt som har med Docker att göra i min VPS istället.
+
+Absolut kan jag se nyttan av detta i testsammanhang. Det tar sin lilla tid att få igenom ett test på detta sätt. Men samtidigt blir det ett kraftfullt verktyg att kunna testa kod mot flera olika miljöer och versioner.
+
+Det jag funderar på är om man inte även kan leverera ett projekt i en Docker kontainer så att den kör i samma miljö som den utvecklats i, vilken dator som än startar upp koden? Har för mig jag läste lite detta någonstans. Är det så anser jag nog jag att Docker har ett större användningsområde än själva testningen. Då blir det inte lika viktigt att det fungerar för många olika versioner samtidigt.
+
+#### Hur väl lyckades du utvärdera TDD-konceptet och vilka är dina reflektioner?
+Trots att jag har ett stort motstånd inför tester på grund av att jag upplever det svårt och att det tar mycket tid så tilltalar arbetssätten TDD och ännu mer BDD mig väldigt mycket.
+
+I detta fallet valde jag att först fundera ut vad som skulle krävas av min memoryCard-klass och skrev testfallen för detta. Sen testade jag mig fram, skrev om och ändrade tills testfallen gick igenom. Det var väldigt bra, och jag vet med mig att jag hade missat minst saker i koden som inte upptäckts annars. Det känns verkligen som att detta sätt att arbeta ger en stabil grund att arbeta vidare på. Att kunna känna mig relativt trygg med att nuvarande kod håller innan när man går vidare är mycket trevligt.
+
+Det känns verkligen som ett bra arbetssätt. Även om det just i stunden kan kännas som frustrerande mycket extraarbete så får man en annan trygghet i att koden håller. Man kan förmodligen även tjäna in tid på grund av detta när ett projekt växer sig större. Framför allt lär det bli färre buggar som dyker upp i efterhand. Jag märkte skillanden under förra ramverkskursen, att det blev mycket lättare att ringa in en bugg när man hade tester att utesluta med.
+
+#### Berätta om tankarna kring din klient/server applikation och nämn de tekniker du använder.
+Jag är så himla osäker på hur jag skall gå tillväga, så mina tankar är mest en massa funderingar om det mest grundläggande; hur jag skall få en klient att kunna prata med en server eller var lägger man koden för klienten. Jag har för lite kött på benen helt enkelt för att kunna lägga ut en strategi eller några välformulerade tankar kring olika val av tekniker eller annat. Tyvärr.
+
+Men i dagsläget har min app/ samma struktur som på min redovisningssida. Det är Express och Pug för vyn. Sen har jag strukturerat enligt MVC med 'Controllers' och så småningom med moduler i src/. Så är tanken i alla fall. Men jag behöver får ta det ett kursmoment i taget och vara öppen för att ändra - att göra om och göra rätt, under arbetets gång.

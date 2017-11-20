@@ -22,3 +22,6 @@ För information kan man gå vidare till [ITs kurssida](https://bth.itslearning.
 5. Databas
 6. Egen modul
 7. Projekt
+
+### Memoryspel
+Från och med kursmoment 3 byggs ett [memoryspel](http://82.102.5.98:8001/) upp, sakta men säkert.
