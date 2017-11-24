@@ -1,8 +1,10 @@
 (function () {
+    /**
+    * Check nickname inputfield. If empty disable connectionbtn.
+    */
     function doCheck() {
-        var nicknamevalue, nickname;
+        var nicknamevalue;
 
-        nickname = document.getElementById('nickname');
         nicknamevalue = document.getElementById('nickname').value;
 
         if (nicknamevalue === '') {
@@ -12,5 +14,6 @@
         }
     }
 
+    // Checking nickname inputfield when keyup or when focusout
     $('#nickname').keyup(doCheck).focusout(doCheck);
 })();
