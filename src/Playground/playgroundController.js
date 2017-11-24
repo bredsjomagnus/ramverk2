@@ -66,3 +66,24 @@ exports.postTestPage = function(req, res) {
 
     res.render(view, data);
 };
+
+/**
+* Testsida för klient till websocket broadcast server
+*/
+exports.bctestclientPage = function(req, res) {
+    var data, view;
+
+    //--------------------------
+
+    view = 'playground/bctestclient';
+
+    data = {
+        title: 'MODULTEST | maaa16',
+        navlist: navbarjson,
+        thisurl: "/playground",
+    };
+
+    //---------------------------
+
+    res.render(view, data);
+};

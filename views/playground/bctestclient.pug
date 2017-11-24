@@ -1,0 +1,32 @@
+extend ../layout.pug
+
+block main
+    .container
+        .page
+            h1 Broadcast test client
+
+            p.text-muted Kod från exempelkod för att få igång det och kunna leka med det. Learning by doing.
+
+            <form id="form1">
+                <p>
+                    <label>Connect: </label><br>
+                    <input id="connect_url" type="text" value="ws://localhost:1337/" >
+                    <input id="connect" type="button" value="Connect">
+                    <input id="close" type="button" value="Close connection">
+                </p>
+
+                <p>
+                    <label>Send message: </label><br>
+                    <input id="message" type="text">
+                    <input id="send_message" type="button" value="Send message">
+                </p>
+
+                <p>
+                    <label>Log: </label><br>
+                    <div id="output" class="output"></div>
+                </p>
+            </form>
+
+block scripts
+    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js", integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa", crossorigin="anonymous")
+    script(src="/javascripts/bctestclient.js")

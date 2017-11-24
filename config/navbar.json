@@ -12,6 +12,10 @@
         "text": "Rapporter"
     },
     {
+        "route": "/chat",
+        "text": "Chatt"
+    },
+    {
         "route": "/playground",
         "text": "Sandlåda"
     },
