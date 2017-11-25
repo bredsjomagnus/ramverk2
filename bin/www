@@ -43,32 +43,39 @@ wss.broadcastExcept = (ws, data) => {
 };
 
 // Broadcast data to everyone except one self (ws).
-wss.broadcast = (data) => {
+wss.broadcastUsers = (data) => {
     let clients = 0;
 
     wss.clients.forEach((client) => {
-        if (client.readyState === WebSocket.OPEN) {
-            clients++;
-            client.send(data);
-        }
+        clients++;
+        client.send(data);
     });
-    console.log(`Broadcasted data to ${clients} (${wss.clients.size}) clients.`);
+    console.log(`Broadcasted users to ${clients} (${wss.clients.size}) clients.`);
 };
 
 // Setup for websocket requests.
 // Docs: https://github.com/websockets/ws/blob/master/doc/ws.md
-wss.on("connection", (ws) => {
+wss.on("connection", (ws, data) => {
     console.log("Connection received. Adding client.");
-    wss.broadcastExcept(ws, `New client connected (${wss.clients.size}).`);
-
-    ws.on("open", (nickname) => {
-        console.log(nickname);
-        wws.broadcast(nickname);
-    });
+    // wss.broadcastExcept(ws, `New client connected (${wss.clients.size}).`);
+    // wss.broadcastUsers(nickname);
+    // console.log("ws - data: " + wss.clients);
+    // ws.send("Välkommen!");
 
     ws.on("message", (message) => {
-        console.log("Received: %s", message);
-        wss.broadcastExcept(ws, message);
+        // console.log("Received: %s", message);
+        // wss.broadcastExcept(ws, message);
+        // JSON.parse(message);
+        jsonmsg = JSON.parse(message);
+        console.log(jsonmsg.content);
+        if (jsonmsg.type === 'alias') {
+            users.push(jsonmsg.content);
+            sendusers = {
+                type: "users",
+                userarray: users
+            }
+            wss.broadcastUsers(JSON.stringify(sendusers));
+        }
     });
 
     ws.on("error", (error) => {

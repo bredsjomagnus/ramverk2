@@ -2,7 +2,7 @@
     let websocket;
     let connect     = document.getElementById("connect");
     let nickname    = document.getElementById('nickname');
-    // let clientlist  = document.getElementById("clientarea");
+    let clientlist  = document.getElementById("clientarea");
     let output      = document.getElementById("msgarea");
     // var nicknamevalue = document.getElementById('nickname').value;
 
@@ -37,6 +37,27 @@
         output.scrollTop = output.scrollHeight;
     }
 
+    function renderClientArea(userarray) {
+        var HTMLlist = "";
+
+        clientlist.innerHTML = "";
+        for (var i = 0; i < userarray.length; i++) {
+            HTMLlist += "<p>"+userarray[i]+"</p>";
+        }
+        clientlist.innerHTML = HTMLlist;
+    }
+
+    function addClientMsg(jsonmsg) {
+        let now = new Date();
+        let timestamp = now.toLocaleTimeString();
+        var htmlmsg;
+
+        htmlmsg = document.createElement('div');
+        htmlmsg.className = "well";
+        htmlmsg.innerHTML = `${timestamp} ${jsonmsg.nick} ${jsonmsg.content}`;
+        output.appendChild(htmlmsg);
+    }
+
     /**
     * What to do when user clicks Connect
     */
@@ -44,18 +65,36 @@
         console.log("Connecting to ws://localhost:1337/");
         websocket = new WebSocket('ws://localhost:1337/');
 
-        websocket.onopen = function(event) {
+        websocket.onopen = function() {
             console.log("The websocket is now open.");
             console.log(websocket);
-            outputLog("The websocket is now open." + event.data);
-            websocket.send(nickname.value);
+            var msg;
+
+            // outputLog("The websocket is now open." + event.data);
+            msg = {
+                type: 'alias',
+                content: nickname.value
+            };
+            console.log(msg.type);
+            websocket.send(JSON.stringify(msg));
+            // websocket.send(msg);
+
+            $("#connectform").hide();
         };
 
         websocket.onmessage = function(event) {
             console.log("Receiving message: " + event.data);
             console.log(event);
             console.log(websocket);
-            outputLog("Server said: " + event.data);
+            var jsonmsg;
+
+            // outputLog("Server said: " + event.data);
+            jsonmsg = JSON.parse(event.data);
+            if (jsonmsg.type === 'users') {
+                renderClientArea(jsonmsg.userarray);
+            } else if (jsonmsg.type === 'clientmsg') {
+                addClientMsg(jsonmsg);
+            }
         };
 
         websocket.onclose = function() {
