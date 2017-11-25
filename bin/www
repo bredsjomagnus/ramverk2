@@ -67,14 +67,26 @@ wss.on("connection", (ws, data) => {
         // wss.broadcastExcept(ws, message);
         // JSON.parse(message);
         jsonmsg = JSON.parse(message);
+        console.log(jsonmsg.type);
         console.log(jsonmsg.content);
-        if (jsonmsg.type === 'alias') {
+
+
+        if (jsonmsg.type === 'newuser') {
             users.push(jsonmsg.content);
             sendusers = {
                 type: "users",
                 userarray: users
             }
             wss.broadcastUsers(JSON.stringify(sendusers));
+        } else if (jsonmsg.type === 'deleteuser') {
+            var deletenick = jsonmsg.content;
+            console.log("deletenick: " + deletenick);
+            users = users.filter( function(deletenick) {
+                return deletenick;
+            });
+            users.splice(users.indexOf(deletenick),1);
+            console.log("After deleting user:" + users);
+
         }
     });
 
@@ -84,7 +96,12 @@ wss.on("connection", (ws, data) => {
 
     ws.on("close", (code, reason) => {
         console.log(`Closing connection: ${code} ${reason}`);
-        wss.broadcastExcept(ws, `Client disconnected (${wss.clients.size}).`);
+        sendusers = {
+            type: "users",
+            userarray: users
+        }
+        wss.broadcastUsers(JSON.stringify(sendusers));
+        // wss.broadcastExcept(ws, `Client disconnected (${wss.clients.size}).`);
     });
 });
 

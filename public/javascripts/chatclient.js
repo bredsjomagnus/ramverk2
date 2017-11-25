@@ -4,6 +4,8 @@
     let nickname    = document.getElementById('nickname');
     let clientlist  = document.getElementById("clientarea");
     let output      = document.getElementById("msgarea");
+    let sendmessage = document.getElementById("messagebtn");
+    let close       = document.getElementById("disconnectbtn");
     // var nicknamevalue = document.getElementById('nickname').value;
 
     /**
@@ -72,7 +74,7 @@
 
             // outputLog("The websocket is now open." + event.data);
             msg = {
-                type: 'alias',
+                type: 'newuser',
                 content: nickname.value
             };
             console.log(msg.type);
@@ -80,6 +82,7 @@
             // websocket.send(msg);
 
             $("#connectform").hide();
+            $("#messageform").show();
         };
 
         websocket.onmessage = function(event) {
@@ -91,6 +94,7 @@
             // outputLog("Server said: " + event.data);
             jsonmsg = JSON.parse(event.data);
             if (jsonmsg.type === 'users') {
+                console.log("renderClientArea");
                 renderClientArea(jsonmsg.userarray);
             } else if (jsonmsg.type === 'clientmsg') {
                 addClientMsg(jsonmsg);
@@ -100,7 +104,48 @@
         websocket.onclose = function() {
             console.log("The websocket is now closed.");
             console.log(websocket);
-            outputLog("Websocket is now closed.");
+
+
+            // outputLog("Websocket is now closed.");
+            $("#messageform").hide();
+            $("#connectform").show();
         };
     }, false);
+
+    /**
+     * What to do when user clicks to send a message.
+     */
+    sendmessage.addEventListener("click", function(/*event*/) {
+        let messageText = sendmessage.value;
+
+        if (!websocket || websocket.readyState === 3) {
+            console.log("The websocket is not connected to a server.");
+        } else {
+            websocket.send(messageText);
+            console.log("Sending message: " + messageText);
+            outputLog("You said: " + messageText);
+        }
+    });
+
+
+
+    /**
+     * What to do when user clicks Close connection.
+     */
+    close.addEventListener("click", function(/*event*/) {
+        console.log("Closing websocket.");
+        var msg;
+
+        msg = {
+            type: 'deleteuser',
+            content: nickname.value
+        };
+        // console.log(msg.type);
+        websocket.send(JSON.stringify(msg));
+        clientlist.innerHTML = "";
+        // websocket.send("Client closing connection by intention.");
+        websocket.close();
+        console.log(websocket);
+        // outputLog("Prepare to close websocket.");
+    });
 })();
