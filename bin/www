@@ -24,10 +24,32 @@ var server = http.createServer(app);
  */
 const wss = new WebSocket.Server({
     server: server,
-    clientTracking: true // keep track on connected clients
+    clientTracking: true, // keep track on connected clients
+    handleProtocols: handleProtocols
 });
 
 var users = [];
+
+/**
+ * Select subprotocol to use for connection.
+ *
+ * @param {Array} protocols              Subprotocols to choose from, sent
+ *                                        by client request.
+ * @param {http.IncomingMessage} request The client HTTP GET request.
+ *
+ * @return {void}
+ */
+function handleProtocols(protocols /*, request */) {
+    console.log(`Incoming protocol requests '${protocols}'.`);
+    for (var i=0; i < protocols.length; i++) {
+        if (protocols[i] === "text") {
+            return "text";
+        } else if (protocols[i] === "json") {
+            return "json";
+        }
+    }
+    return false;
+}
 
 // Broadcast data to everyone except one self (ws).
 wss.broadcastExcept = (ws, data) => {
@@ -45,7 +67,6 @@ wss.broadcastExcept = (ws, data) => {
 // Broadcast data to everyone except one self (ws).
 wss.broadcastUsers = (data) => {
     let clients = 0;
-
     wss.clients.forEach((client) => {
         clients++;
         client.send(data);
@@ -61,36 +82,43 @@ wss.on("connection", (ws, data) => {
     // wss.broadcastUsers(nickname);
     // console.log("ws - data: " + wss.clients);
     // ws.send("Välkommen!");
+    console.log("WS: " + ws);
 
     ws.on("message", (message) => {
-        jsonmsg = JSON.parse(message);
         // console.log(jsonmsg.type);
         // console.log(jsonmsg.content);
 
-
-        if (jsonmsg.type === 'newuser') {
-            users.push(jsonmsg.content);
-            sendusers = {
-                type: "users",
-                userarray: users
+        if (ws.protocol === "json") {
+            console.log("kommer hit");
+            jsonmsg = JSON.parse(message);
+            console.log(jsonmsg);
+            if (jsonmsg.type === 'newuser') {
+                users.push(jsonmsg.content);
+                console.log(users);
+                msg = {
+                    type: "users",
+                    userarray: users
+                }
+                wss.broadcastUsers(JSON.stringify(msg));
+            } else if (jsonmsg.type === 'deleteuser') {
+                var deletenick = jsonmsg.content;
+                // console.log("deletenick: " + deletenick);
+                users = users.filter( function(deletenick) {
+                    return deletenick;
+                });
+                users.splice(users.indexOf(deletenick),1);
+                // console.log("After deleting user:" + users);
+            } else if (jsonmsg.type === 'clientmsg') {
+                // console.log("jsonmsg.nick: " +jsonmsg.nick);
+                msg = {
+                    type: "clientmsg",
+                    nick: jsonmsg.nick,
+                    content: jsonmsg.content
+                }
+                wss.broadcastUsers(JSON.stringify(msg));
             }
-            wss.broadcastUsers(JSON.stringify(sendusers));
-        } else if (jsonmsg.type === 'deleteuser') {
-            var deletenick = jsonmsg.content;
-            // console.log("deletenick: " + deletenick);
-            users = users.filter( function(deletenick) {
-                return deletenick;
-            });
-            users.splice(users.indexOf(deletenick),1);
-            // console.log("After deleting user:" + users);
-        } else if (jsonmsg.type === 'clientmsg') {
-            // console.log("jsonmsg.nick: " +jsonmsg.nick);
-            broadcastmessage = {
-                type: "clientmsg",
-                nick: jsonmsg.nick,
-                content: jsonmsg.content
-            }
-            wss.broadcastUsers(JSON.stringify(broadcastmessage));
+        } else if (ws.protocol === 'text') {
+            wss.broadcastUsers(message);
         }
     });
 

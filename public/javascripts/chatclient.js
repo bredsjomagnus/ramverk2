@@ -7,6 +7,7 @@
     let sendmessage = document.getElementById("messagebtn");
     let clientmessage = document.getElementById("message");
     let close       = document.getElementById("disconnectbtn");
+    let protocol    = document.getElementById("protocol");
     // var nicknamevalue = document.getElementById('nickname').value;
 
     /**
@@ -32,13 +33,13 @@
     *
     * @return {void}
     */
-    function outputLog(message) {
-        let now = new Date();
-        let timestamp = now.toLocaleTimeString();
-
-        output.innerHTML += `${timestamp} ${message}<br>`;
-        output.scrollTop = output.scrollHeight;
-    }
+    // function outputLog(message) {
+    //     let now = new Date();
+    //     let timestamp = now.toLocaleTimeString();
+    //
+    //     output.innerHTML += `${timestamp} ${message}<br>`;
+    //     output.scrollTop = output.scrollHeight;
+    // }
 
     function renderClientArea(userarray) {
         var HTMLlist = "";
@@ -63,29 +64,45 @@
 
         htmlmsg = document.createElement('div');
         htmlmsg.className = "well clientmsgwell";
-        htmlmsg.innerHTML = "<p>" + `${timestamp}` + " [<strong>" + nick + "</strong>]: " + content+"</p>";
+        htmlmsg.innerHTML = "<p>"+`${timestamp}`+" [<strong>"+nick+"</strong>]: "+content+"</p>";
         output.appendChild(htmlmsg);
+    }
+
+    /**
+    * Select what subprotocol to use for websocket connection.
+    *
+    * @return {string} with name of subprotocol.
+    */
+    function setSubProtocol() {
+        return protocol.value;
     }
 
     /**
     * What to do when user clicks Connect
     */
     connect.addEventListener("click", function() {
-        console.log("Connecting to ws://localhost:1337/");
-        websocket = new WebSocket('ws://localhost:1337/');
+        console.log("Connecting to ws://localhost:1337/ with " + setSubProtocol() + " protocol.");
+
+        websocket = new WebSocket('ws://localhost:1337/', setSubProtocol());
+
+
 
         websocket.onopen = function() {
             console.log("The websocket is now open.");
             console.log(websocket);
-            var msg;
 
-            // outputLog("The websocket is now open." + event.data);
-            msg = {
-                type: 'newuser',
-                content: nickname.value
-            };
-            console.log(msg.type);
-            websocket.send(JSON.stringify(msg));
+            if (protocol.value === 'json') {
+                var msg;
+
+                // outputLog("The websocket is now open." + event.data);
+                msg = {
+                    type: 'newuser',
+                    content: nickname.value
+                };
+                console.log(msg.type);
+                websocket.send(JSON.stringify(msg));
+            }
+
             // websocket.send(msg);
 
             $("#connectform").hide();
@@ -96,6 +113,7 @@
             console.log("Receiving message: " + event.data);
             console.log(event);
             console.log(websocket);
+
             var jsonmsg;
 
             // outputLog("Server said: " + event.data);
@@ -129,12 +147,11 @@
         if (!websocket || websocket.readyState === 3) {
             console.log("The websocket is not connected to a server.");
         } else {
-
             msg = {
                 type: "clientmsg",
                 nick: nickname.value,
                 content: messagetext
-            }
+            };
             websocket.send(JSON.stringify(msg));
             console.log("Sending message: " + messagetext);
             // outputLog("You said: " + messagetext);
