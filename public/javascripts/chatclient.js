@@ -5,6 +5,7 @@
     let clientlist  = document.getElementById("clientarea");
     let output      = document.getElementById("msgarea");
     let sendmessage = document.getElementById("messagebtn");
+    let clientmessage = document.getElementById("message");
     let close       = document.getElementById("disconnectbtn");
     // var nicknamevalue = document.getElementById('nickname').value;
 
@@ -44,7 +45,11 @@
 
         clientlist.innerHTML = "";
         for (var i = 0; i < userarray.length; i++) {
-            HTMLlist += "<p>"+userarray[i]+"</p>";
+            if (userarray[i] === nickname.value) {
+                HTMLlist += "<p><strong>"+userarray[i]+"</strong></p>";
+            } else {
+                HTMLlist += "<p>"+userarray[i]+"</p>";
+            }
         }
         clientlist.innerHTML = HTMLlist;
     }
@@ -53,10 +58,12 @@
         let now = new Date();
         let timestamp = now.toLocaleTimeString();
         var htmlmsg;
+        var nick = jsonmsg.nick;
+        var content = jsonmsg.content;
 
         htmlmsg = document.createElement('div');
-        htmlmsg.className = "well";
-        htmlmsg.innerHTML = `${timestamp} ${jsonmsg.nick} ${jsonmsg.content}`;
+        htmlmsg.className = "well clientmsgwell";
+        htmlmsg.innerHTML = "<p>" + `${timestamp}` + " [<strong>" + nick + "</strong>]: " + content+"</p>";
         output.appendChild(htmlmsg);
     }
 
@@ -116,14 +123,21 @@
      * What to do when user clicks to send a message.
      */
     sendmessage.addEventListener("click", function(/*event*/) {
-        let messageText = sendmessage.value;
+        let messagetext = clientmessage.value;
+        var msg;
 
         if (!websocket || websocket.readyState === 3) {
             console.log("The websocket is not connected to a server.");
         } else {
-            websocket.send(messageText);
-            console.log("Sending message: " + messageText);
-            outputLog("You said: " + messageText);
+
+            msg = {
+                type: "clientmsg",
+                nick: nickname.value,
+                content: messagetext
+            }
+            websocket.send(JSON.stringify(msg));
+            console.log("Sending message: " + messagetext);
+            // outputLog("You said: " + messagetext);
         }
     });
 
@@ -143,6 +157,7 @@
         // console.log(msg.type);
         websocket.send(JSON.stringify(msg));
         clientlist.innerHTML = "";
+        output.innerHTML = "";
         // websocket.send("Client closing connection by intention.");
         websocket.close();
         console.log(websocket);

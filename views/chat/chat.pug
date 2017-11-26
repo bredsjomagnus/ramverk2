@@ -9,11 +9,16 @@ block main
                 .col-md-6
                     <form id='connectform'>
                         <div class="input-group">
-                            <input class='form-control' type='text' id='nickname' placeholder='nickname'>
+                            <input class='form-control' style=width:98%; type='text' id='nickname' placeholder='nickname'>
                             <span class="input-group-btn">
+                                <select class='form-control' style=width:120%;>
+                                    <option value='json'>json</option>
+                                    <option value='text'>text</option>
+                                </select>
                                 <input class='btn btn-primary' type='button' id='connect' value='Anslut' disabled>
                             </span>
                         </div>
+
                     </form>
                     <form id='messageform' class='messageform'>
                         <div class="input-group">
