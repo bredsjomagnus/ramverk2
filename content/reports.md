@@ -76,3 +76,35 @@ Det känns verkligen som ett bra arbetssätt. Även om det just i stunden kan k�
 Jag är så himla osäker på hur jag skall gå tillväga, så mina tankar är mest en massa funderingar om det mest grundläggande; hur jag skall få en klient att kunna prata med en server eller var lägger man koden för klienten. Jag har för lite kött på benen helt enkelt för att kunna lägga ut en strategi eller några välformulerade tankar kring olika val av tekniker eller annat. Tyvärr.
 
 Men i dagsläget har min app/ samma struktur som på min redovisningssida. Det är Express och Pug för vyn. Sen har jag strukturerat enligt MVC med 'Controllers' och så småningom med moduler i src/. Så är tanken i alla fall. Men jag behöver får ta det ett kursmoment i taget och vara öppen för att ändra - att göra om och göra rätt, under arbetets gång.
+
+---
+
+### KMOM04
+
+#### Är du ny på realtidsprogrammering eller har du gjort liknande tidigare?
+Jag har gjort en chatt i Java, men det känns som hundra år sedan ungefär, så i princip är jag ny vad gäller detta.
+
+När jag startade hade jag ingen aning hur jag skulle börja ens, så dessa dagarna har varit lärorika med tanke på vad jag hunnit med fram tills redovisning. Det blev en chat och ett Memoryspel.
+
+#### Hur gick det att jobba med konceptet realtidsprogrammering i webben, några reflektioner?
+Tycker nog det gått rätt så bra, så länge det bara varit det mest grundläggande. Jag har exempelvis inte lagt in något om koll av uppkoppling eller liknande, utan bara att skicka json fram och tillbaka mellan server och klient.
+
+En begränsning för min del är att jag enbart fått det att fungera med json som subprotokoll. Tvingas jag till annat blir det nog som att behöva börja om från början igen. Det är tack vare json som meddelanden kan riktas till rätt plats mellan server och klient.
+
+En annan reflektion är att det är väldigt roligt och öppnar upp för möjligheter när man vill ge sig på andra projekt.
+
+#### Berätta om din chatt som du integrerade i redovisa-sidan.
+Detta var det första jag gjorde och höll mig till det mest grundläggande för att kunna lära mig tillvägagångssättet ett steg i taget.
+
+Man måste ange ett nickname för att kunna ansluta sig till chatten och som ansluten får man upp alla klienter, inklusive sig själv, som är inloggade. Meddelandena landar mitt på sidan som egna gråfärgade divs med info om tid och nickname utöver själva meddelandet.
+
+#### Berätta om den realtidsfunktionalitet du väljer att integrera i din klient/server applikation.
+Här jag har tagit med chatten från redovisningssidan och uppgraderat den lite. Liksom på redovisasidan måste man ange ett nickname för att kunna koppla upp sig. Detta är ju, utöver chatmöjligheten, ett Memoryspel, så varje ansluten klient tilldelas då en färg och varje nickname blir unikt. Om två med samma nickname loggar in läggs siffra till på den senast anslutna. Ens egna nickname är fetstilt i listan över klienterna. Nu hamnar även meddelandena i en begränsad div som får en scrollbar som landar längst ner vid nya meddelanden.
+
+När alla anslutit sig som vill vara med kan vem som av klienterna klicka 'Starta spel' och 12 memorykort läggs ut. Nu slumpas också ut vem som börjar av spelarna och detta syns bredvid dennes namn i klientlistan. Den som börjar får vända två kort (det är enbart den spelare vars tur det är som kan vända kort). Är det inte ett par kan inga fler kort vändas och det dyker upp en knapp, 'Nästa spelare' (synlig enbart för den spelare som nyligen vände de två korten), som avslutar turen och ger den till spelaren under i spelarlistan. Detta uppdaterar spelarlistan så att '- din tur' visar på vem som skall agera härnäst. Spelkorten vänds också tillbaka i detta läget.
+
+Får man ett par markeras dessa med spelarens färg och man får fortsätta lyfta kort. Paren vänds inte tillbaka utan ligger rättvända med spelarensfärg som markerar vems paret är. Tillslut är alla kort vända och man kan räkna via färgerna på korten vem som fick flest par.
+
+Det som inte är gjort är en poängsammanställning för vilka par respektive spelar lyckats få ihop. Skulle även kunna läggas in en knapp 'Starta nytt spel' eller liknande när ett spel är klart och man vill börja om. Dessutom är det, som sagt, ytterst känsligt mot att en spelare blir fel bortkopplad och man måste starta om servern när så sker. Detta kan göra det svårt att testa. Men jag har det liggandes på min VPS och om ni vill testa det där och det blir knas så meddela mig så jag starta om det.
+
+En annan sak är att jag gärna skulle vilja kunna starta upp flera olika spelrum. Men det känns som något som kanske kommer längre fram. Det allra viktigaste i nuläget att att få den stabil med hantering av icke frivilligt bortkopplade klienter.
