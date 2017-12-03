@@ -1,0 +1,27 @@
+extend ../layout.pug
+
+block main
+    .container
+        .page
+            h1 MONGO CRUD
+
+            <form action='/mongocrud/insert' method='POST'>
+                <input type='text' name='username' placeholder='namn' />
+                <input type='submit' name='inputbtn' value='Lägg till' />
+            </form>
+
+            h2 DATABASENS INNEHÅLL
+
+            <table class='table'>
+                <thead>
+                    <th>Förnamn</th>
+                    <th>Efternamn</th>
+                </thead>
+                <tbody>
+                    each val, index in result
+                        <tr>
+                            <td>#{result[index].firstname}</td>
+                            <td>#{result[index].surname}</td>
+                        </tr>
+                </tbody>
+            </table>

@@ -16,6 +16,10 @@
         "text": "Chatt"
     },
     {
+        "route": "/mongocrud/index",
+        "text": "CRUD"
+    },
+    {
         "route": "/playground",
         "text": "Sandlåda"
     },

@@ -6,17 +6,18 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 // MongoDB
-const mongo = require("mongodb").MongoClient;
-const dsn =  process.env.DBWEBB_DSN || "mongodb://localhost:27017/mumin";
+const dsn =  process.env.DBWEBB_DSN || "mongodb://magnus:vb8gGtlQT3@ds129156.mlab.com:29156/maaa16";
+const database = require("./src/Mongo/database");
 
-const fs = require("fs");
-// const pathjson = require("path");
-const docs = JSON.parse(fs.readFileSync(
-    path.resolve(__dirname, "setup.json"),
-    "utf8"
-));
 
-console.log(docs);
+// const fs = require("fs");
+// // const pathjson = require("path");
+// const docs = JSON.parse(fs.readFileSync(
+//     path.resolve(__dirname, "setup.json"),
+//     "utf8"
+// ));
+//
+// console.log(docs);
 
 // ROUTES
 var index = require('./config/routes/index');
@@ -24,6 +25,7 @@ var memory = require('./config/routes/memory');
 var chat = require('./config/routes/chat');
 var playground = require('./config/routes/playground');
 var users = require('./config/routes/users');
+var mongoroute = require('./config/routes/mongo');
 
 var app = express();
 
@@ -45,11 +47,12 @@ app.use('/memory', memory);
 app.use('/chat', chat);
 app.use('/playground', playground);
 app.use('/users', users);
+app.use('/mongocrud', mongoroute);
 
 // Return a JSON object with list of all documents within the collection.
 app.get("/list", async (request, response) => {
     try {
-        let res = await findInCollection(dsn, "crowd", {}, {}, 0);
+        let res = await database.findInCollection(dsn, "users", {}, {}, 0);
 
         console.log(res);
         response.json(res);
@@ -59,30 +62,7 @@ app.get("/list", async (request, response) => {
     }
 });
 
-/**
- * Find documents in an collection by matching search criteria.
- *
- * @async
- *
- * @param {string} dsn        DSN to connect to database.
- * @param {string} colName    Name of collection.
- * @param {object} criteria   Search criteria.
- * @param {object} projection What to project in results.
- * @param {number} limit      Limit the number of documents to retrieve.
- *
- * @throws Error when database operation fails.
- *
- * @return {Promise<array>} The resultset as an array.
- */
-async function findInCollection(dsn, colName, criteria, projection, limit) {
-    const db  = await mongo.connect(dsn);
-    const col = await db.collection(colName);
-    const res = await col.find(criteria, projection).limit(limit).toArray();
 
-    await db.close();
-
-    return res;
-}
 
 
 // catch 404 and forward to error handler
