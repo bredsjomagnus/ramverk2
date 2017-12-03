@@ -16,6 +16,8 @@ const docs = JSON.parse(fs.readFileSync(
     "utf8"
 ));
 
+console.log(docs);
+
 // ROUTES
 var index = require('./config/routes/index');
 var memory = require('./config/routes/memory');
