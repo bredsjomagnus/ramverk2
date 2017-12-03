@@ -1,8 +1,9 @@
-#!/usr/bin/env node
-
 /**
  * Module dependencies.
  */
+
+ "use strict";
+
 var app = require('../app');
 var debug = require('debug')('rv2me:server');
 var http = require('http');
@@ -82,7 +83,7 @@ wss.on("connection", (ws, data) => {
     // wss.broadcastUsers(nickname);
     // console.log("ws - data: " + wss.clients);
     // ws.send("Välkommen!");
-    console.log("WS: " + ws);
+    // console.log("WS: " + ws);
 
     ws.on("message", (message) => {
         // console.log(jsonmsg.type);
@@ -90,12 +91,12 @@ wss.on("connection", (ws, data) => {
 
         if (ws.protocol === "json") {
             console.log("kommer hit");
-            jsonmsg = JSON.parse(message);
+            var jsonmsg = JSON.parse(message);
             console.log(jsonmsg);
             if (jsonmsg.type === 'newuser') {
                 users.push(jsonmsg.content);
                 console.log(users);
-                msg = {
+                var msg = {
                     type: "users",
                     userarray: users
                 }
@@ -110,7 +111,7 @@ wss.on("connection", (ws, data) => {
                 // console.log("After deleting user:" + users);
             } else if (jsonmsg.type === 'clientmsg') {
                 // console.log("jsonmsg.nick: " +jsonmsg.nick);
-                msg = {
+                var msg = {
                     type: "clientmsg",
                     nick: jsonmsg.nick,
                     content: jsonmsg.content
@@ -143,7 +144,7 @@ wss.on("connection", (ws, data) => {
 	// 	this.onclose(e);
     ws.on("close", (code, reason) => {
         console.log(`Closing connection: ${code} ${reason}`);
-        sendusers = {
+        var sendusers = {
             type: "users",
             userarray: users
         }

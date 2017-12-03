@@ -1,8 +1,8 @@
 # Memoryspel
-Jag tänker mig att göra att göra ett [memoryspel](http://82.102.5.98:8001/) där man kan möta 'datorn' eller spela flera motvarandra.
+Jag har gjort [memoryspel](http://82.102.5.98:8001/). Än så länge kan man inte möta någon dator. Men det kommer kanske längre fram.
 
-Än så länge har jag enbart en klass Memorycard för själva korten, som jag utfört tester mot.
+I nuläget finns ett fungerande Memoryspel där man kan spela mot varandra (max 9 st just nu). Det finns i dagsläget 12 memorykort med djurtema.
 
-Jag använder Express, pug och less. Än så länge finns inte mycket men tanken är att det skall byggas med MVC.
+Jag använder Express, pug och less.
 
-Jag är osäker på hur jag skall göra med klient och server så jag har i dagsläget enbart ett repo med allt i. Sen när det klarnar efterhand så kanske jag väljer att dela upp det. Men det får bli en framtida fundering. Här är det lite learning by doing och jag måste vänta in kursmomenten för att kunna ta olika beslut.
+På serversidan finns en Gamebrain som håller koll på spelregler och vad som bör hända härnäst samt Memorycard som håller koll på kortens positioner och innehåll. Servern reagerar på spelarnas agerande och rådfrågar därefter Gamebrain och Memorycard om vad som bör hända och hur spelbrädet bör uppdateras. Klassen Gameboard delges resultatet av vad Gamebrain och Memorycard gett. Därefter skickas Gameboard till alla spelarna som tar emot Gameboard för att kunna rita upp spelbrädet i sin webbläsare efter de nya förutsättningarna.

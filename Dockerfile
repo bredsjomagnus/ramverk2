@@ -1,21 +1,11 @@
-FROM node:6.11.5
-MAINTAINER Magnus Andersson (magnusandersson076@gmail.com)
-# ENV DBWEBB_PORT=8006
-# Create app directory
+# Use a base image
+FROM node:alpine
+
+# Create a workdir
 RUN mkdir -p /app
 WORKDIR /app
 
-# Install app dependencies
+# Install npm packages
 COPY package.json /app
-# For npm@5 or later, copy package-lock.json as well
-# COPY package-lock.json .
-
+COPY package-lock.json /app
 RUN npm install
-# If you are building your code for production
-# RUN npm install --only=production
-
-# Bundle app source
-# COPY . .
-
-EXPOSE 3000
-# CMD [ "npm", "start" ]

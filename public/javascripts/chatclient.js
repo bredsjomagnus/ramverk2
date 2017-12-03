@@ -81,9 +81,9 @@
     * What to do when user clicks Connect
     */
     connect.addEventListener("click", function() {
-        console.log("Connecting to ws://localhost:1337/ with " + setSubProtocol() + " protocol.");
+        console.log("Connecting to ws://82.102.5.98:1337/ with " + setSubProtocol() + " protocol.");
 
-        websocket = new WebSocket('ws://localhost:1337/', setSubProtocol());
+        websocket = new WebSocket('ws://82.102.5.98:1337/', setSubProtocol());
 
 
 
