@@ -18,6 +18,13 @@
         "react"
     ],
     "rules": {
+        "no-unused-vars":
+        [
+            2,
+            {
+                "args": "after-used", "varsIgnorePattern": "toForm"
+            }
+        ],
         "indent": [
             2,
             4,

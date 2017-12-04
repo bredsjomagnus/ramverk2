@@ -19,12 +19,41 @@ const mongo = require("mongodb").MongoClient;
  * @return {Promise<array>} The resultset as an array.
  */
 exports.findInCollection = async function(dsn, colName, criteria, projection, limit) {
-    console.log("colName: " + colName);
+    // console.log("colName: " + colName);
     const db  = await mongo.connect(dsn);
     const col = await db.collection(colName);
+
     const res = await col.find(criteria, projection).limit(limit).toArray();
 
     await db.close();
 
     return res;
+};
+
+
+exports.insertToCollection = async function(dsn, colName, doc) {
+    const db = await mongo.connect(dsn);
+    const col = await db.collection(colName);
+
+    await col.insert(doc);
+
+    await db.close();
+};
+
+exports.updateSpecField = async function(dsn, colName, query, update) {
+    const db = await mongo.connect(dsn);
+    const col = await db.collection(colName);
+
+    await col.update(query, {$set: update});
+
+    await db.close();
+};
+
+exports.deleteOneFromCollection = async function(dsn, colName, filter) {
+    const db = await mongo.connect(dsn);
+    const col = await db.collection(colName);
+
+    await col.deleteOne(filter);
+
+    await db.close();
 };

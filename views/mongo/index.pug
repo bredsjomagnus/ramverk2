@@ -3,25 +3,50 @@ extend ../layout.pug
 block main
     .container
         .page
-            h1 MONGO CRUD
 
-            <form action='/mongocrud/insert' method='POST'>
-                <input type='text' name='username' placeholder='namn' />
-                <input type='submit' name='inputbtn' value='Lägg till' />
-            </form>
+            div.row
+                h1 MONGO CRUD
+                div.col-md-4
+                    h4 LÄGG TILL ANVÄNDARE
+                    <form action='#' method='POST'>
+                        <label for='firstname'>Förnamn</label>
+                        <input class='form-control' type='text' name='firstname' placeholder='Förnamn' />
+                        <label for='surname'>Efternamn</label>
+                        <input class='form-control' type='text' name='surname' placeholder='Efternamn' />
+                        <label for='occupation'>Sysselsättning</label>
+                        <input class='form-control' type='text' name='occupation' placeholder='Sysselsättning' /><br>
+                        <input class='btn btn-primary' type='submit' name='inputbtn' value='Lägg till' />
+                    </form>
+                div.col-md-7
+                    h4 INLAGDA ANVÄNDARE
+                    p.text-muted Klicka i tabellen för att redigera information för en inlagd användare.
 
-            h2 DATABASENS INNEHÅLL
+                    <table class='table'>
+                        <thead>
+                            <th>Förnamn</th>
+                            <th>Efternamn</th>
+                            <th>Sysselsättning</th>
+                            <th></th>
+                        </thead>
+                        <tbody>
+                            each val, index in result
+                                <tr>
+                                    <td>
+                                        <div id='firstname_#{result[index]._id}' onclick="toForm('firstname_#{result[index]._id}', '#{result[index]._id}', '#{result[index].firstname}', 'firstname')">#{result[index].firstname}</div>
+                                    </td>
+                                    <td>
+                                        <div id='surname_#{result[index]._id}' onclick="toForm('surname_#{result[index]._id}', '#{result[index]._id}', '#{result[index].surname}', 'surname')">#{result[index].surname}</div>
+                                    </td>
+                                    <td>
+                                        <div id='occupation_#{result[index]._id}' onclick="toForm('occupation_#{result[index]._id}', '#{result[index]._id}', '#{result[index].occupation}', 'occupation')">#{result[index].occupation}</div>
+                                    </td>
+                                    <td>
+                                        <a href='./delete/#{result[index]._id}'>Ta bort</a>
+                                    </td>
+                                </tr>
+                        </tbody>
+                    </table>
 
-            <table class='table'>
-                <thead>
-                    <th>Förnamn</th>
-                    <th>Efternamn</th>
-                </thead>
-                <tbody>
-                    each val, index in result
-                        <tr>
-                            <td>#{result[index].firstname}</td>
-                            <td>#{result[index].surname}</td>
-                        </tr>
-                </tbody>
-            </table>
+block scripts
+    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js", integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa", crossorigin="anonymous")
+    script(src="/javascripts/mongocrud.js")
