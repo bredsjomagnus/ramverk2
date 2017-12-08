@@ -108,3 +108,25 @@ Får man ett par markeras dessa med spelarens färg och man får fortsätta lyft
 Det som inte är gjort är en poängsammanställning för vilka par respektive spelar lyckats få ihop. Skulle även kunna läggas in en knapp 'Starta nytt spel' eller liknande när ett spel är klart och man vill börja om. Dessutom är det, som sagt, ytterst känsligt mot att en spelare blir fel bortkopplad och man måste starta om servern när så sker. Detta kan göra det svårt att testa. Men jag har det liggandes på min VPS och om ni vill testa det där och det blir knas så meddela mig så jag starta om det.
 
 En annan sak är att jag gärna skulle vilja kunna starta upp flera olika spelrum. Men det känns som något som kanske kommer längre fram. Det allra viktigaste i nuläget att att få den stabil med hantering av icke frivilligt bortkopplade klienter.
+
+---
+
+### KMOM05
+#### Hur gick det att komma igång med databasen MongoDB?
+Det är ju lite nya begrepp och ett nytt tillvägagångssätt som måste arbetas in. Men det var inte alltför svårt att komma igång, så det gick smidigare än befarat måste jag säga. Testade både mot dockerservern och mot mlab och kunde rätt så snart få det att fungera som tänkt mot båda två. Kollade runt lite efter bra klienter men kom mig inte för att testa någon. Inte än i vilket fall.
+
+Det var lite intressant att jämföra docker kontainer mot mlab då det var märkbarskillnad på snabbheten när man ville lägga till eller uppdatera information i databasen, till docker kontainers favör. Sen kan det ju klart vara en fördel med mlabs tillgänglighet.
+
+Mitt MongoDB inlägg för detta kursmoment ligger under CRUD i navbaren och redigering/uppdatering av databasen görs genom att klicka i tabellen för att kunna skriva in ny informaiton.
+
+#### Vilken syn har du på databaser inom konceptet NoSQL?
+Det är första gången jag stöter på det så jag vet inte riktigt. Det är alltid kul att testa nytt och jag gillar konceptet att arbeta mot annat än tabeller. Det gör det så mycket friare. Sen finns trade offs på grund av det. Smidigt också att man kan använda JSON hela vägen i och med MongoDB.
+
+#### Reflektera över skillnader och likheter mellan relationsdatabaser och databaser inom NoSQL.
+Om jag förstått rätt så är relationsdatabas bättre vad gäller stabilitet vid mycket trafik. Relationsdatabaser stödjer också mer komplexa frågor och har en standard kring dessa som NoSQL saknar. Antar att man bör använda sig av relationsdatabaser om man har data av mer känslig natur och som ställer höga krav på databasens tillförlitlighet. NoSQL-databaser är däremot bra om man vill spara en stor massa data och att man dessutom kan spara den i en hierarkisk ordning.
+
+#### Vilka är dina tankar om asynkron programmering med JavaScript?
+För mig är det som något som måste besegras. Jag tycker just nu att det är komplicerat och svårt att verkligen förstå allt vad det innebär och vad som händer med promises och annat. Men samtidigt är det något som inte kan undgås. Kapitel 5 i *Exploring js* var bra för förståelsen, men att det var bitar även där som jag måste kolla vidare på, som jag inte riktigt hängde med på vad som menades. Exemplevis skickandet av promises och vad det innebär. Men det får ta lite tid och kollar man vidare och arbetar mer med det så litar jag på att förståelsen kommer på köpet.
+
+#### Hur känner du för Docker och det sättet vi jobbar med tjänster i kontainrar?
+Så länge jag arbetar i Linux är det bara en fröjd. Hade lite problem med att den först ville starta upp en annan node än vad som stod i dockerfilen. Men när jag rensade cache och tog bort alla gamla images så fick jag det slutligen att fungera. Därefter var det inga problem och nu har jag både redovisningssidan, appsidan och matmodsidan via docker på min vps. Hur smidigt som helst. Detta underlättar mycket när man skall starta om också. Innan fick jag hitta processerna och döda dem för att kunna lägga upp på nytt. Nu sköts allt enkelt via docker-compose, vilket gör det så mycket lättare.

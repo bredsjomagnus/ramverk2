@@ -16,6 +16,7 @@ function toForm(divid, id, value, field) {
     input.setAttribute("value", value);
     input.setAttribute("type", "text");
     input.setAttribute("name", "newvalue");
+    input.setAttribute("class", "form-control");
 
     inputhiddenfield.setAttribute("type", "hidden");
     inputhiddenfield.setAttribute("name", "field");

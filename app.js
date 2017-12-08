@@ -6,8 +6,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 // MongoDB
-const dsn =  process.env.DBWEBB_DSN || "mongodb://magnus:vb8gGtlQT3@ds129156.mlab.com:29156/maaa16";
-const database = require("./src/Mongo/database");
+// const dsn =  process.env.DBWEBB_DSN ||
+// "mongodb://magnus:vb8gGtlQT3@ds129156.mlab.com:29156/maaa16";
+// const database = require("./src/Mongo/database");
 
 
 // const fs = require("fs");
@@ -50,17 +51,17 @@ app.use('/users', users);
 app.use('/mongocrud', mongoroute);
 
 // Return a JSON object with list of all documents within the collection.
-app.get("/list", async (request, response) => {
-    try {
-        let res = await database.findInCollection(dsn, "users", {}, {}, 0);
-
-        console.log(res);
-        response.json(res);
-    } catch (err) {
-        console.log(err);
-        response.json(err);
-    }
-});
+// app.get("/list", async (request, response) => {
+//     try {
+//         let res = await database.findInCollection(dsn, "users", {}, {}, 0);
+//
+//         console.log(res);
+//         response.json(res);
+//     } catch (err) {
+//         console.log(err);
+//         response.json(err);
+//     }
+// });
 
 
 
