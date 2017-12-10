@@ -28,8 +28,40 @@
 # Ramverk2
 För utbildning, PA1442 H17 Lp2 Webbaserade ramverk 2 (distans) BTH.
 
-Ett demo för repot finns [här](http://82.102.5.98:1337/).
+Ett demo för repot finns [här](http://82.102.5.98:1337/). Demot kör via docker.
 
-#### Kursmoment i repot så här långt
-  - v1.\*.* - Express/pug
-  - v2.\*.* - Docker
+### Tekniker
+Följande tekniker har använts för redovisningssidan.
+
+* Server - Express
+* Vy - Pug
+* Tester - Mocha
+* Databas - MongoDB
+
+### Uppstart
+Man kan starta upp sidan med `npm start` och om man sitter i windowsmiljö är det bättre att använda `./restart.bat` för att forcera avslutande av pågående processer, för att det inte skall krocka.
+
+Med `npm run start-docker` körs `docker-compose up -d express` som bygger på imagen `node-alpine`.
+
+Docker fungerar dock inte i Windows utan enbart i Linux.
+
+### Miljövariabler
+DBWEBB_PORT används för att ange vilken port som kopplas upp mot. Är variablen inte satt används port 1337 som default.
+
+DBWEBB_DSN sätts till mongo som körs i docker kontainer. Annars används dsn mot [mlab](https://mlab.com/) som default.
+
+### Tester
+Man kan utföra tester mot tre olika docker images; node 6_alpine, node 7_alpine och node latest.
+
+##### npm
+* `npm run test` - för enhetstest
+* `npm run test-6` - för linter och test mot node 6_alpine
+* `npm run test-7` - för linter och test mot node 7_alpine
+* `npm run test-latest` - för linter och test mot node latest
+
+##### make
+
+* `make test` - linter plus enhetstest
+* `make test1` - för linter och test mot node 6_alpine
+* `make test2` - förlinter och test mot node 7_alpine
+* `make test3` - förlinter och test mot node latest

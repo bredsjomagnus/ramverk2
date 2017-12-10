@@ -130,3 +130,32 @@ För mig är det som något som måste besegras. Jag tycker just nu att det är 
 
 #### Hur känner du för Docker och det sättet vi jobbar med tjänster i kontainrar?
 Så länge jag arbetar i Linux är det bara en fröjd. Hade lite problem med att den först ville starta upp en annan node än vad som stod i dockerfilen. Men när jag rensade cache och tog bort alla gamla images så fick jag det slutligen att fungera. Därefter var det inga problem och nu har jag både redovisningssidan, appsidan och matmodsidan via docker på min vps. Hur smidigt som helst. Detta underlättar mycket när man skall starta om också. Innan fick jag hitta processerna och döda dem för att kunna lägga upp på nytt. Nu sköts allt enkelt via docker-compose, vilket gör det så mycket lättare.
+
+---
+
+### KMOM06
+#### Reflektera över vikten av infrastruktur för moduler för ett programmeringsspråk.
+Det är viktigt att det finns ett bra och smidigt sätt att använda andras moduler eller att för sig själv kunna spara moduler som blir pusselbitar till andra projekt. Att använda copy/paste kan fungera till en viss gräns. Men när det finns flera projekt som använder samma kod/module och det räcker man ändrar koden på ett ställe och sen kör npm install för att få ner det till de andra projekten blir det klart oändligt mycket smidigare.
+
+Det är den ena aspekten. Den andra är möjligheten att på en enkelt sätt nyttja andras kod och att då ha ett system där moduler är beroende av andra moduler inte göra livet svårt. En stor förtjänst är just att modulkatalogerna, så som packagist och npm, ser till att beroenden hanteras på ett smidigt sätt när nytt skall in i systemet.
+
+När det finns dessa möjligheter kan det säkert ge en snöbollseffekt på grund av att andras kod blir så lättillgäng för alla, och ger en skjuts till utvecklinen framåt.
+
+#### Vill du ge dig på att förklara att just npm är den tjänsten som växt snabbast av de modulerkataloger som presenteras på webbplatsen “Module Counts”?
+Jag kan tänka mig att det bland annat rör sig om att javascript är väldigt populärt just nu och att programmeringsspråket får fler och fler användare. Då är det inte så konstigt om modulkatalogen för språket också växer.
+
+När jag kollar runt lite så läste jag mig till att exempelvis npm är överlägset Bower när det kommer till hur man hanterar beroenden. Den modulkatalog som hanterar beroende på ett smidigt och smärtfritt sätt har en stark position i konkurrensen med andra. Dessutom, om man fortsätter jämförelse mellan Bower och npm, så är npm mer allsidig; med både backend och frontend moduler. Medan Bower enbart har frontend moduler. Hittade ett inlägg från Mattias Petter Johansson, Software Engineer på Spotify som helt enkelt utryckte sig så här "There is simply no benefit for a front-end developer to use Bower over npm" [länk](https://www.quora.com/Why-use-Bower-when-there-is-npm) .
+
+#### Reflektera över hur arbetet gick att välja, separera, publisera och sedan åter integrera module i din applikation.
+Tycker det gick bra. Men att jag egentligen velat bryta ut mer än vad jag lyckades med denna gång. Nu har jag enbart de klasser som används av servern och till viss del klienten för att få spelet att fungera. Men hade helst sett att jag även kunnat få med koden i serverdelen. Lika så har jag valt att lägga bildern på korten utanför. Men det finns ingående förklarat i README vilka delar som måste in extra och det gäller då både serverkod, klienten, stil, pug och bilder. Allt ligger i repot för hämtning.
+
+Det som var klurigast var hur jag skulle kunna samla tre klasser och tre filer till en export. Men att jag efter ett tag lyckades leta och testa mig fram till något som fungerade. Detta med moduler och exportering av dem verkar vara en vetenskap i sig. Det finns en hel del att läsa i frågan och det verkar finnas många olika varianter som passar bra på olika ställen vid olika situationer. Jag får gå tillbaka och studera vidare detta mer sen.
+
+Sen var det ju också den delen att komma åt klasserna efter att man requirat modulen. Även det behövde lite testande fram och tillbaka innan allt satt. Men nu när man gjort det en gång så känns det som ett smidigt sätt att kunna återanvända kod i form av moduler.
+
+Det är lite kul att det är så pass enkelt och smidigt att göra moduler. I skrivande stund har 237 laddat ner min modul! Trots att jag i princip avråder det i README och är tydlig med att modulen är för utbildningssyfte. Men det visar ju på hur mycket aktivitet som råder på npm när så pass många, under ett dygn, ändå hittat min testmodul och dessutom laddat ner den.
+
+#### Sista uppgiften om att dokumentera och färdigställa redovisa-sidan, tog det mycket tid eller hade du allt klart?
+Det tog tid för att det krånglade med dockertesterna. Lyckades inte få till det helt på min VPS med make filen. Även när jag kört make setup-tools-js och installerat dessa så hittar den inte alla linters. Några stycken, men inte alla. Lokalt så fungerar den biten utan problem dock. Det är däremot tvärtom när det kommer till Docker där jag inte kan köra det lokalt utan enbart på VPSen. Så det blev en hel del fram och tillbaka för att tillslut få det att sitta.
+
+Som det är nu kan man köra mot tre olika docker images med både make- och npm-kommandon, allt enligt dokumentationen i README.
